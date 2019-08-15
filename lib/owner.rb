@@ -8,7 +8,6 @@ require "pry"
 class Owner
   attr_writer :cats 
   attr_reader :name, :species, :cats, :dogs 
-  attr_accessor :pets
   #attr_writer :species
   #attr_accessor :species
   @@all = []
@@ -49,7 +48,7 @@ class Owner
   end 
   
   def feed_cats 
-    Cat.all.select {|cat| cat.mood = "happy"}
+    Cat.all.map {|cat| cat.mood = "happy"}
   end 
   
   def dogs 
@@ -61,20 +60,26 @@ class Owner
  end 
  
  def walk_dogs
-  Dog.all.select{|dog| dog.mood = "happy"}
+  Dog.all.map {|dog| dog.mood = "happy"}
 end 
 
 def pets 
-  @pets << Dog.all.name && Cat.all.name 
-  binding.pry 
+  @pets << Dog.all 
+  @pets << Cat.all 
+  @pets.flatten
+#binding.pry 
 end 
 
 def sell_pets 
-   
+  pets.map do  |pet| 
+    pet.mood = "nervous"
+    pet.owner = nil
+ end 
  end 
  
  def list_pets
-   "I have #{@owner.dogs.count}dog(s), and #{@owner.cats.count} cat(s)."
+   "I have #{self.dogs.count} dog(s), and #{self.cats.count} cat(s)."
+ #end
  end 
  
 end
