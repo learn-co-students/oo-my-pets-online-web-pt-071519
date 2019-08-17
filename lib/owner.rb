@@ -12,7 +12,7 @@ class Owner
   end
 
   def say_species
-    "I am a #{species}."
+    "I am a #{@species}."
   end
 
   def self.all
@@ -20,11 +20,11 @@ class Owner
   end
 
   def self.count
-    @@all.count
+    self.all.count
   end
 
   def self.reset_all
-    @@all.clear
+    self.all.clear
   end
 
   def cats
@@ -40,11 +40,35 @@ class Owner
   end
 
   def buy_dog(dog_by_string)
-    new_dog = Dog.new(dog_by_string, self)
+    Dog.new(dog_by_string, self)
   end
 
-  def walk_dogs(dog_name)
-  #  dog_name.mood = "happy"
+  def walk_dogs
+    self.dogs.each {|d| d.mood = "happy"}
+  end
+
+  def feed_cats
+    self.cats.each {|c| c.mood = "happy"}
+  end
+
+  def sell_pets
+    pets = self.dogs + self.cats
+    pets.each do |pet|
+      pet.mood = "nervous"
+      pet.owner = nil
+
+    #self.dogs.clear
+    #self.cats.clear
+    #self.dogs.each {|x| x.mood = "nervous"}
+    #self.cats.each {|x| x.mood = "nervous"}
+    #self.dogs.each {|x| x.owner = nil}
+    #self.cats.each {|x| x.owner = nil}
+  end
+  end
+
+  def list_pets
+    "I have #{self.dogs.count} dog(s), and #{self.cats.count} cat(s)."
+    #binding.pry
   end
 
 end
