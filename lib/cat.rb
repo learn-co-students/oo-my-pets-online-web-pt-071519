@@ -6,6 +6,7 @@ class Cat
   def initialize(name, owner)
     @owner = owner 
     @name = name
+    owner.pets[:cats]<<self
     @mood = "nervous"
     @@all << self
   end

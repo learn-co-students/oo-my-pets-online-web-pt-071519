@@ -29,19 +29,30 @@ end
   end
   
   def buy_cat(cat_name)
-    binding.pry
+    #binding.pry
     #@pets[:cats] << Cat.new(cat_name)
-    self.cats.each do |cat|
-      self.pets[:cats] << cat
+    # self.cats.each do |cat|
+    #   self.pets[:cats] << cat
+    # end
+    Cat.new(cat_name, self)
+  end 
+
+  def buy_dog(dog_name)
+    Dog.new(dog_name, self)
+    #@pets[:dogs] << Dog.new(dog_name)
+  end
+
+  def feed_cats
+    Cat.all.each do |cat|
+    #make all self.cats mood into happy
+    cat.mood = "happy"
     end
   end
 
-  def buy_dog(dog_name)
-    @pets[:dogs] << Dog.new(dog_name)
-  end
-
   def walk_dogs
-    @pets[:dogs].each do |dog|
+    Dog.all.each do |dog|
+      #binding.pry
+    #@pets[:dogs].each do |dog|
       dog.mood = "happy"
     end
   end
@@ -53,13 +64,15 @@ end
   end
 
   def sell_pets
-    @pets.each do |type, name_array|
-      name_array.each do |pet|
-        pet.mood = "nervous"
+    pets.each do |type_of_animal, array|
+      binding.pry
+      #name_array.each do |pet|
+        #pet.mood = "nervous"
         #name_array.delete(pet)
-      end 
+      
+      #end 
     end
-    @pets = {}
+    #@pets = {}
   end
 
   def list_pets
