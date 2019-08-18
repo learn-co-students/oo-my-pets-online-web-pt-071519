@@ -45,6 +45,7 @@ describe "Associations" do
 
         @owner.cats.each do |cat|
           expect(cat).to be_a(Cat)
+          #binding.pry
         end
 
         expect(@owner.cats.count).to eq(3)
