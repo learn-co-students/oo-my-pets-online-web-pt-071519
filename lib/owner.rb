@@ -1,6 +1,6 @@
 require 'pry'
 class Owner
-  # code goes here
+  
   attr_accessor :pets
   attr_reader :species, :name 
 
@@ -10,7 +10,6 @@ class Owner
     @name = name
     @species = "human"
     @pets = {:dogs => [], :cats => []}
-    #@pets = pets
     @@owners << self 
   end
   def cats
@@ -29,31 +28,22 @@ end
   end
   
   def buy_cat(cat_name)
-    #binding.pry
-    #@pets[:cats] << Cat.new(cat_name)
-    # self.cats.each do |cat|
-    #   self.pets[:cats] << cat
-    # end
     Cat.new(cat_name, self)
   end 
 
   def buy_dog(dog_name)
     Dog.new(dog_name, self)
-    #@pets[:dogs] << Dog.new(dog_name)
   end
 
   def feed_cats
     Cat.all.each do |cat|
-    #make all self.cats mood into happy
     cat.mood = "happy"
     end
   end
 
   def walk_dogs
     Dog.all.each do |dog|
-      #binding.pry
-    #@pets[:dogs].each do |dog|
-      dog.mood = "happy"
+    dog.mood = "happy"
     end
   end
 
@@ -65,14 +55,13 @@ end
 
   def sell_pets
     pets.each do |type_of_animal, array|
-      binding.pry
-      #name_array.each do |pet|
-        #pet.mood = "nervous"
-        #name_array.delete(pet)
-      
-      #end 
+        array.each do |pet|
+        pet.mood = "nervous"
+        pet.owner=nil
+        array.delete(pet)
+       end 
     end
-    #@pets = {}
+    
   end
 
   def list_pets
